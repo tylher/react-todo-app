@@ -6,16 +6,21 @@ class InputTodo extends Component {
   };
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    
+      this.setState({ [e.target.name]: e.target.value });
   };
 
   handleSubmit = (e) => {
-      e.preventDefault();
-      this.props.addTodoProps(this.state.title)
+    e.preventDefault();
+    if (this.state.title.trim()) {
+      this.props.addTodoProps(this.state.title);
+    } else {
+      alert("Please write item");
+    }
   };
   render() {
     return (
-        <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <input
           type="text"
           placeholder="Add todo ..."
@@ -23,7 +28,7 @@ class InputTodo extends Component {
           onChange={this.handleChange}
           name="title"
         />
-        <button >Submit</button>
+        <button>Submit</button>
       </form>
     );
   }
