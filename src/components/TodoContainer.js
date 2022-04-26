@@ -2,7 +2,7 @@ import { Component } from "react";
 import Header from "./Header";
 import InputTodo from "./InputTodo";
 import TodoList from "./TodoList";
-import {v4 as uuidv4} from "uuid"
+import { v4 as uuidv4 } from "uuid";
 
 class TodoContainer extends Component {
   state = {
@@ -47,20 +47,25 @@ class TodoContainer extends Component {
 
   addTodo = (title) => {
     this.setState({
-      todos: [...this.state.todos, { id: uuidv4(), title: title, completed: false }],
+      todos: [
+        ...this.state.todos,
+        { id: uuidv4(), title: title, completed: false },
+      ],
     });
   };
 
   render() {
     return (
-      <div>
-        <Header />
-        <InputTodo addTodoProps={this.addTodo} />
-        <TodoList
-          todos={this.state.todos}
-          onHandleChange={this.handleChange}
-          onHandleDelete={this.delTodo}
-        />
+      <div className="container">
+        <div className="inner">
+          <Header />
+          <InputTodo addTodoProps={this.addTodo} />
+          <TodoList
+            todos={this.state.todos}
+            onHandleChange={this.handleChange}
+            onHandleDelete={this.delTodo}
+          />
+        </div>
       </div>
     );
   }
