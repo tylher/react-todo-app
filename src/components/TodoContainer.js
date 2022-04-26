@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Header from "./Header";
 import TodoList from "./TodoList";
 
 class TodoContainer extends Component {
@@ -20,11 +21,16 @@ class TodoContainer extends Component {
         completed: false,
       },
     ],
-  };
+    };
+    
+   handleChange = (id) => {
+        console.log('cliked',id)
+    }
   render() {
     return (
-      <div>
-        <TodoList todos={this.state.todos} />
+        <div>
+        <Header/>
+            <TodoList todos={this.state.todos} onHandleChange={this.handleChange}/>
       </div>
     );
   }
