@@ -21,16 +21,37 @@ class TodoContainer extends Component {
         completed: false,
       },
     ],
-    };
-    
-   handleChange = (id) => {
-        console.log('cliked',id)
-    }
+  };
+
+  handleChange = (id) => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      }),
+    }));
+  };
+
+  delTodo = (id) => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter((todo) => todo.id !== id),
+    }));
+  };
+
   render() {
     return (
-        <div>
-        <Header/>
-            <TodoList todos={this.state.todos} onHandleChange={this.handleChange}/>
+      <div>
+        <Header />
+        <TodoList
+          todos={this.state.todos}
+          onHandleChange={this.handleChange}
+          onHandleDelete={this.delTodo}
+        />
       </div>
     );
   }
