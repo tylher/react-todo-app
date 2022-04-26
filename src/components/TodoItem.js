@@ -23,8 +23,8 @@ class TodoItem extends Component {
     }
   }
   render() {
-    const { completed, title, id, handleChangeProps, delTodoProps } =
-      this.props.todo;
+    // const { completed, title, id, handleChangeProps, delTodoProps } =
+    //   this.props.todo;
 
     let editMode = {};
     let viewMode = {};
@@ -36,23 +36,23 @@ class TodoItem extends Component {
     }
     return (
       <li className={styles.item}>
-        <div onDoubleClick={this.handleEditing} style={viewMode}>
-          <input
-            className={styles.checkbox}
-            type="checkbox"
-            checked={completed}
-            onChange={() => handleChangeProps(id)}
-          />
-          <span style={completed ? this.completedStyle : null}>{title}</span>
-          <button onClick={() => delTodoProps(id)}>delete</button>
-        </div>
+      <div style={viewMode}>
+      <input
+        className={styles.checkbox}
+        type="checkbox"
+        checked={this.props.todo.completed}
+        onChange={() => this.props.handleChangeProps(this.props.todo.id)}
+      />
+      <span style={this.props.todo.completed ? this.completedStyle : null}>{this.props.todo.title}</span>
+        <button onClick={() => this.props.delTodoProps(this.props.todo.id)}>delete</button>
+      </div>
 
         <input
           type="text"
-          value={title}
+          value={this.props.todo.title}
           style={editMode}
           className={styles.textInput}
-          onChange={(e) => this.props.updateTitleProps(e.target.value, id)}
+          onChange={(e) => this.props.updateTitleProps(e.target.value, this.props.todo.id)}
           onKeyDown={this.handleUpdateDone}
         />
       </li>
