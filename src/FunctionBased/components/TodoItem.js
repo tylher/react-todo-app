@@ -2,9 +2,14 @@ import { Component } from "react";
 import styles from "./TodoItem.module.css";
 
 class TodoItem extends Component {
+
   state = {
     editing: false,
   };
+
+  componentWillUnmount = () => {
+    console.log('Cleaning up ....')
+  }
 
   completedStyle = {
     fontStyle: "italic",
@@ -23,8 +28,8 @@ class TodoItem extends Component {
     }
   }
   render() {
-    // const { completed, title, id, handleChangeProps, delTodoProps } =
-    //   this.props.todo;
+    const { completed, title, id } =
+      this.props.todo;
 
     let editMode = {};
     let viewMode = {};
@@ -36,15 +41,15 @@ class TodoItem extends Component {
     }
     return (
       <li className={styles.item}>
-      <div style={viewMode}>
+      <div style={viewMode} onDoubleClick={this.handleEditing}>
       <input
         className={styles.checkbox}
         type="checkbox"
-        checked={this.props.todo.completed}
-        onChange={() => this.props.handleChangeProps(this.props.todo.id)}
+        checked={completed}
+        onChange={() => this.props.handleChangeProps(id)}
       />
-      <span style={this.props.todo.completed ? this.completedStyle : null}>{this.props.todo.title}</span>
-        <button onClick={() => this.props.delTodoProps(this.props.todo.id)}>delete</button>
+      <span style={completed ? this.completedStyle : null}>{title}</span>
+        <button onClick={() => this.props.delTodoProps(id)}>delete</button>
       </div>
 
         <input
@@ -52,7 +57,7 @@ class TodoItem extends Component {
           value={this.props.todo.title}
           style={editMode}
           className={styles.textInput}
-          onChange={(e) => this.props.updateTitleProps(e.target.value, this.props.todo.id)}
+          onChange={(e) => this.props.updateTitleProps(e.target.value, id)}
           onKeyDown={this.handleUpdateDone}
         />
       </li>

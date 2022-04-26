@@ -1,7 +1,7 @@
 import { Component } from "react";
-import Header from "./Header";
+import Header from "../ClassBased/Header";
 import InputTodo from "./InputTodo";
-import TodoList from "./TodoList";
+import TodoList from "../TodoList";
 import { v4 as uuidv4 } from "uuid";
 
 class TodoContainer extends Component {
@@ -10,10 +10,21 @@ class TodoContainer extends Component {
   };
 
   componentDidMount = () => {
-    fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
-      .then((res) => res.json())
-      .then((data) => this.setState({ todos: data }));
+    const temp = localStorage.getItem("todos");
+    const loadedTodos = JSON.parse(temp);
+    if (loadedTodos) {
+      this.setState({
+        todos: loadedTodos,
+      });
+    }
   };
+
+  componentDidUpdate = (prevState,prevProps) => {
+    if(prevState.todos !== this.state.todos){
+      const temp = JSON.stringify(this.state.todos)
+      localStorage.setItem('todos', temp);
+    }
+  }
 
   handleChange = (id) => {
     this.setState((prevState) => ({
