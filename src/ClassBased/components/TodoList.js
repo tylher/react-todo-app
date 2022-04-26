@@ -1,5 +1,5 @@
 import { Component } from "react";
-import TodoItem from "../FunctionBased/TodoItem";
+import TodoItem from "../../FunctionBased/components/TodoItem";
 
 class TodoList extends Component {
   render() {
