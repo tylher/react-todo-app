@@ -19,8 +19,6 @@
   > JSON,
   > Babel
 
-## Live Demo
-Check out live demo [here](https://tylher.github.io/react-todo-app/)
 
 ## Getting Started
 
