@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react";
-import Header from "../../ClassBased/components/Header";
-import InputTodo from "./InputTodo";
-import TodoList from "../../ClassBased/components/TodoList";
-import { v4 as uuidv4 } from "uuid";
+/* eslint-disable no-param-reassign */
+import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import Header from '../../ClassBased/components/Header';
+import InputTodo from './InputTodo';
+import TodoList from '../../ClassBased/components/TodoList';
 
 const TodoContainer = () => {
   const getInitialTodos = () => {
-    const savedTodos = JSON.parse(localStorage.getItem("todos"));
+    const savedTodos = JSON.parse(localStorage.getItem('todos'));
     return savedTodos || [];
   };
   const [todos, setTodos] = useState(getInitialTodos());
 
   useEffect(() => {
-    const temp = localStorage.getItem("todos");
+    const temp = localStorage.getItem('todos');
     const loadedTodos = JSON.parse(temp);
     if (loadedTodos) {
       setTodos(loadedTodos);
@@ -21,21 +22,19 @@ const TodoContainer = () => {
 
   useEffect(() => {
     const temp = JSON.stringify(todos);
-    localStorage.setItem("todos", temp);
+    localStorage.setItem('todos', temp);
   }, [todos]);
 
   const handleChange = (id) => {
-    setTodos((prevState) =>
-      prevState.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        }
-        return todo;
-      })
-    );
+    setTodos((prevState) => prevState.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          completed: !todo.completed,
+        };
+      }
+      return todo;
+    }));
   };
 
   const delTodo = (id) => {
@@ -46,20 +45,18 @@ const TodoContainer = () => {
 
   const addTodo = (title) => {
     setTodos([
-      ...this.state.todos,
-      { id: uuidv4(), title: title, completed: false },
+      ...todos,
+      { id: uuidv4(), title, completed: false },
     ]);
   };
 
   const setUpdateTitle = (UpdatedTitle, id) => {
-    this.setState({
-      todos: this.state.todos.map((todo) => {
-        if (id === todo.id) {
-          todo.title = UpdatedTitle;
-        }
-        return todo;
-      }),
-    });
+    setTodos(todos.map((todo) => {
+      if (id === todo.id) {
+        todo.title = UpdatedTitle;
+      }
+      return todo;
+    }));
   };
 
   return (

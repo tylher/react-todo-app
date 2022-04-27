@@ -1,22 +1,26 @@
-import { Component } from "react";
-import TodoItem from "../../FunctionBased/components/TodoItem";
+/* eslint-disable react/prop-types */
+import TodoItem from '../../FunctionBased/components/TodoItem';
 
-class TodoList extends Component {
-  render() {
-    return (
-      <ul>
-        {this.props.todos.map((todo) => (
+const TodoList = (props) => {
+  const {
+    todos, onHandleChange, onHandleDelete, onHandleUpdate,
+  } = props;
+  return (
+    <ul>
+      {todos.map((todo) => {
+        const { id } = todo;
+        return (
           <TodoItem
-            key={todo.id}
+            key={id}
             todo={todo}
-            handleChangeProps={this.props.onHandleChange}
-            delTodoProps={this.props.onHandleDelete}
-            updateTitleProps={this.props.onHandleUpdate}
+            handleChangeProps={onHandleChange}
+            delTodoProps={onHandleDelete}
+            updateTitleProps={onHandleUpdate}
           />
-        ))}
-      </ul>
-    );
-  }
-}
+        );
+      })}
+    </ul>
+  );
+};
 
 export default TodoList;

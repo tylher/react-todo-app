@@ -1,68 +1,66 @@
-import { Component } from "react";
-import styles from "./TodoItem.module.css";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from 'react';
+import styles from './TodoItem.module.css';
 
-class TodoItem extends Component {
+const TodoItem = (props) => {
+  const [editing, setEditing] = useState(false);
+  const {
+    todo, handleChangeProps, delTodoProps, updateTitleProps,
+  } = props;
 
-  state = {
-    editing: false,
-  };
+  useEffect(() => {
+    console.log('Cleaning up ....');
+  }, []);
 
-  componentWillUnmount = () => {
-    console.log('Cleaning up ....')
-  }
-
-  completedStyle = {
-    fontStyle: "italic",
-    color: "#595959",
+  const completedStyle = {
+    fontStyle: 'italic',
+    color: '#595959',
     opacity: 0.4,
-    textDecoration: "line-through",
+    textDecoration: 'line-through',
   };
 
-  handleEditing = () => {
-    this.setState({ editing: true });
+  const handleEditing = () => {
+    setEditing(true);
   };
 
-  handleUpdateDone = (event) => {
-    if (event.key === "Enter") {
-      this.setState({ editing: false });
+  const handleUpdateDone = (event) => {
+    if (event.key === 'Enter') {
+      setEditing(false);
     }
+  };
+  const { completed, title, id } = todo;
+
+  const editMode = {};
+  const viewMode = {};
+
+  if (editing) {
+    viewMode.display = 'none';
+  } else {
+    editMode.display = 'none';
   }
-  render() {
-    const { completed, title, id } =
-      this.props.todo;
-
-    let editMode = {};
-    let viewMode = {};
-
-    if (this.state.editing) {
-      viewMode.display = "none";
-    } else {
-      editMode.display = "none";
-    }
-    return (
-      <li className={styles.item}>
-      <div style={viewMode} onDoubleClick={this.handleEditing}>
-      <input
-        className={styles.checkbox}
-        type="checkbox"
-        checked={completed}
-        onChange={() => this.props.handleChangeProps(id)}
-      />
-      <span style={completed ? this.completedStyle : null}>{title}</span>
-        <button onClick={() => this.props.delTodoProps(id)}>delete</button>
+  return (
+    <li className={styles.item}>
+      <div style={viewMode} onDoubleClick={handleEditing}>
+        <input
+          className={styles.checkbox}
+          type="checkbox"
+          checked={completed}
+          onChange={() => handleChangeProps(id)}
+        />
+        <span style={completed ? completedStyle : null}>{title}</span>
+        <button type="button" onClick={() => delTodoProps(id)}>delete</button>
       </div>
 
-        <input
-          type="text"
-          value={this.props.todo.title}
-          style={editMode}
-          className={styles.textInput}
-          onChange={(e) => this.props.updateTitleProps(e.target.value, id)}
-          onKeyDown={this.handleUpdateDone}
-        />
-      </li>
-    );
-  }
-}
+      <input
+        type="text"
+        value={title}
+        style={editMode}
+        className={styles.textInput}
+        onChange={(e) => updateTitleProps(e.target.value, id)}
+        onKeyDown={handleUpdateDone}
+      />
+    </li>
+  );
+};
 
 export default TodoItem;

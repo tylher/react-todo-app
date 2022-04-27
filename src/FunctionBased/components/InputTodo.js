@@ -1,28 +1,30 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 
 const InputTodo = (props) => {
-  const [ inputText, setInputText ] = useState({title:""});
+  const { addTodoProps } = props;
+  const [inputText, setInputText] = useState({ title: '' });
 
   const handleChange = (e) => {
     setInputText({
       ...inputText,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
-    const {title} = inputText
+    const { title } = inputText;
     e.preventDefault();
     if (title.trim()) {
-      props.addTodoProps(title);
-     setInputText({
-       title: "",
-     });
+      addTodoProps(title);
+      setInputText({
+        title: '',
+      });
     } else {
-      alert("Please write item");
+      alert('Please write item');
     }
   };
-const { title } = inputText;
+  const { title } = inputText;
   return (
     <form onSubmit={() => handleSubmit} className="form-container">
       <input
@@ -33,7 +35,7 @@ const { title } = inputText;
         onChange={handleChange}
         name="title"
       />
-      <button className="input-submit">Submit</button>
+      <button type="submit" className="input-submit">Submit</button>
     </form>
   );
 };
