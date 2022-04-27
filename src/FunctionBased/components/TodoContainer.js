@@ -37,26 +37,23 @@ const TodoContainer = () => {
   };
 
   const delTodo = (id) => {
-    setTodos(
-      todos.filter((todo) => todo.id !== id),
-    );
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const addTodo = (title) => {
-    setTodos([
-      ...todos,
-      { id: uuidv4(), title, completed: false },
-    ]);
+    setTodos([...todos, { id: uuidv4(), title, completed: false }]);
   };
 
   const setUpdateTitle = (UpdatedTitle, id) => {
-    setTodos(todos.map((todo) => {
-      if (id === todo.id) {
-        // eslint-disable-next-line no-param-reassign
-        todo.title = UpdatedTitle;
-      }
-      return todo;
-    }));
+    setTodos(
+      todos.map((todo) => {
+        if (id === todo.id) {
+          // eslint-disable-next-line no-param-reassign
+          todo.title = UpdatedTitle;
+        }
+        return todo;
+      }),
+    );
   };
 
   return (

@@ -44,7 +44,9 @@ const TodoItem = (props) => {
           onChange={() => handleChangeProps(id)}
         />
         <span style={completed ? completedStyle : null}>{title}</span>
-        <button type="button" onClick={() => delTodoProps(id)}>delete</button>
+        <button type="button" onClick={() => delTodoProps(id)}>
+          delete
+        </button>
       </div>
 
       <input
