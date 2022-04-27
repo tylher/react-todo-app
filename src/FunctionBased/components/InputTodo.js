@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const InputTodo = (props) => {
   const { addTodoProps } = props;
@@ -20,8 +20,6 @@ const InputTodo = (props) => {
       setInputText({
         title: '',
       });
-    } else {
-      alert('Please write item');
     }
   };
   const { title } = inputText;
@@ -38,6 +36,10 @@ const InputTodo = (props) => {
       <button type="submit" className="input-submit">Submit</button>
     </form>
   );
+};
+
+InputTodo.propTypes = {
+  addTodoProps: PropTypes.func.isRequired,
 };
 
 export default InputTodo;

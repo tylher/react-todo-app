@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
@@ -7,10 +7,6 @@ const TodoItem = (props) => {
   const {
     todo, handleChangeProps, delTodoProps, updateTitleProps,
   } = props;
-
-  useEffect(() => {
-    console.log('Cleaning up ....');
-  }, []);
 
   const completedStyle = {
     fontStyle: 'italic',
@@ -61,6 +57,17 @@ const TodoItem = (props) => {
       />
     </li>
   );
+};
+
+TodoItem.propTypes = {
+  todo: PropTypes.shape({
+    completed: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+  handleChangeProps: PropTypes.func.isRequired,
+  delTodoProps: PropTypes.func.isRequired,
+  updateTitleProps: PropTypes.func.isRequired,
 };
 
 export default TodoItem;

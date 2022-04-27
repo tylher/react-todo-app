@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import TodoItem from '../../FunctionBased/components/TodoItem';
 
 const TodoList = (props) => {
@@ -21,6 +21,19 @@ const TodoList = (props) => {
       })}
     </ul>
   );
+};
+
+TodoList.propTypes = {
+  todos: PropTypes.shape([
+    {
+      completed: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    },
+  ]).isRequired,
+  onHandleChange: PropTypes.func.isRequired,
+  onHandleDelete: PropTypes.func.isRequired,
+  onHandleUpdate: PropTypes.func.isRequired,
 };
 
 export default TodoList;

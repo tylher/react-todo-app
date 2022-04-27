@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Header from '../../ClassBased/components/Header';
@@ -53,6 +52,7 @@ const TodoContainer = () => {
   const setUpdateTitle = (UpdatedTitle, id) => {
     setTodos(todos.map((todo) => {
       if (id === todo.id) {
+        // eslint-disable-next-line no-param-reassign
         todo.title = UpdatedTitle;
       }
       return todo;
