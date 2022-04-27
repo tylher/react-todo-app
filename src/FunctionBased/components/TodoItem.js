@@ -62,7 +62,7 @@ const TodoItem = (props) => {
 TodoItem.propTypes = {
   todo: PropTypes.shape({
     completed: PropTypes.bool.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
   handleChangeProps: PropTypes.func.isRequired,
